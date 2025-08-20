@@ -1,0 +1,33 @@
+behaviors:
+  My Behavior:
+    trainer_type: ppo
+    init_path: results\dino_resnet34_light\My Behavior\My Behavior-214147.onnx
+    
+    hyperparameters:
+      batch_size: 64             # Larger batch cho ResNet (less memory than ViT)
+      buffer_size: 1024           # Larger buffer
+      learning_rate: 0.0003       # Lower LR cho pretrained model
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    
+    network_settings:
+      normalize: false
+      hidden_units: 256
+      num_layers: 2
+      vis_encode_type: simple     # Will be overridden by DINO ResNet encoder
+      
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+    
+    checkpoint_interval: 10000
+    keep_checkpoints: 10
+    max_steps: 5000000              # Good for fine-tuning
+    summary_freq: 2000
+    threaded: true
+
+# Note: DINO ResNet50 settings handled in encoder code

@@ -5,7 +5,7 @@ import os
 import time
 from pathlib import Path
 import glob
-import replace
+import replace_encoder as replace
 import pandas as pd
 
 # ─── Your existing helpers ────────────────────────────────────────────────
@@ -131,7 +131,7 @@ def train_multiple_networks(networks, env_path, runs_per_network=2, log_name=Non
         else:
             config_path = "./Config/nature.yaml"
             if network != "nature_cnn":
-                replace.replace_nature_visual_encoder("C:/Users/mariu/Miniconda3/envs/mouse2/Lib/site-packages/mlagents/trainers/torch/encoders.py", "./Encoders/" + network + ".py")
+                replace.replace_nature_visual_encoder(r"C:\Users\admin\miniconda3\envs\mouse_dinov3_py38\lib\site-packages\mlagents\trainers\torch\encoders.py", "./Encoders/" + network + ".py")
 
         run_ids = train_solo(
             run_id=f"{network}_{env}",
