@@ -1,0 +1,20 @@
+head:
+  bottleneck_dim: 256
+  out_dim: 65536
+loss:
+  out_dim: 65536
+  student_temp: 0.1
+  teacher_temp: 0.07
+model:
+  depth: 6
+  embed_dim: 384
+  img_size: 224
+  num_heads: 6
+  patch_size: 16
+optimizer:
+  lr: 0.0005
+  weight_decay: 0.04
+training:
+  batch_size: 32
+  epochs: 50
+  teacher_momentum: 0.996

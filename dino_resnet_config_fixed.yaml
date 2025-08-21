@@ -1,0 +1,31 @@
+# DINO ResNet50 Config - Properly Tuned
+backbone:
+  arch: resnet50
+  output_dim: 2048          # ResNet50 features
+  pretrained: true
+
+head:
+  bottleneck_dim: 256       # Projection head bottleneck
+  out_dim: 2048            # ⭐ GOOD SIZE cho DINO loss
+
+loss:
+  out_dim: 2048            # ⭐ MUST MATCH head.out_dim!
+  student_temp: 0.1        # Student temperature (entropy)
+  teacher_temp: 0.04       # Teacher temp (sharper, gốc là 0.04)
+
+optimizer:
+  lr: 0.0005               # Slightly lower for stable training
+  backbone_lr: 0.00005     # Very low for pretrained ResNet50  
+  weight_decay: 0.0001
+
+training:
+  epochs: 50
+  batch_size: 32           # Safe for ResNet50
+  teacher_momentum: 0.996  # EMA momentum
+
+# DINO-specific optimizations
+dino_settings:
+  center_momentum: 0.9     # Center momentum cho stability
+  lambda_1: 1.0           # Global loss weight  
+  lambda_2: 1.0           # Local loss weight
+

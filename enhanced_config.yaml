@@ -1,0 +1,35 @@
+backbone:
+  arch: resnet50
+  output_dim: 2048
+  pretrained: true
+crops:
+  global_crops_number: 2
+  global_scale:
+  - 0.6
+  - 1.0
+  global_size: 224
+  local_crops_number: 6
+  local_scale:
+  - 0.15
+  - 0.4
+  local_size: 96
+head:
+  bottleneck_dim: 256
+  nlayers: 3
+  out_dim: 2048
+loss:
+  center_momentum: 0.9
+  out_dim: 2048
+  student_temp: 0.1
+  teacher_temp: 0.04
+  warmup_teacher_temp: 0.04
+  warmup_teacher_temp_epochs: 30
+optimizer:
+  backbone_lr: 0.0001
+  lr: 0.001
+  weight_decay: 0.0001
+training:
+  batch_size: 32
+  epochs: 100
+  teacher_momentum: 0.996
+  warmup_epochs: 10
