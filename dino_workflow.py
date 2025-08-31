@@ -116,7 +116,8 @@ class DINOWorkflow:
             '--env', data_config['env'],
             '--episodes', str(data_config['episodes']),
             '--steps', str(data_config['steps_per_episode']),
-            '--output', data_config['output_dir']
+            '--output', data_config['output_dir'],
+            '--triplets'
         ]
         
         if data_config.get('train_val_split', True):
@@ -134,6 +135,7 @@ class DINOWorkflow:
                     '--episodes', str(data_config['episodes'] // 2),  # Less episodes for additional envs
                     '--steps', str(data_config['steps_per_episode']),
                     '--output', additional_output,
+                    '--triplets',
                     '--split'
                 ]
                 run_command(cmd, f"Collecting additional data from {env}", check=False)
